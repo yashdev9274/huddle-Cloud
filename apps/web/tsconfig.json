@@ -9,10 +9,10 @@
     "baseUrl": ".", // Added baseUrl
     "paths": { // Added paths
       "@/*": [
-        "src/*"
+        "./src/*"
       ], // Adjust this according to your folder structure
       "@/trpc": [
-        "app/trpc/index.ts"
+        "../trpc/index.ts"
       ]
     }
   },
