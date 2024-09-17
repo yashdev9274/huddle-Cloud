@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+// import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,9 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* <KindeProvider> */}
+
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
+      {/* </KindeProvider> */}
     </html>
   );
 }

@@ -1,13 +1,16 @@
-import { type Config } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit";
+import path from "path";
 
-export default {
-    schema: "../../packages/db/schema.ts",
-    // dialect:""
-    out: "migrations",
-    driver: "pg",
+
+export default defineConfig({
+    schema: path.resolve(__dirname, "../../packages/db/schema.ts"),
+    dialect: "postgresql",
+    out: path.resolve(__dirname, "./migrations"), // This will put migrations in apps/web/migrations
     dbCredentials: {
-        connectionString: process.env.DATABASE_URL as String,
+        url: process.env.DATABASE_URL as string,
     },
-
-
-}
+    migrations: {
+        table: "migrations",
+        schema: "public"
+    }
+});
