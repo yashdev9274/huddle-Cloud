@@ -6,6 +6,9 @@ import HeroSection from "./components/hero";
 export default function Home() {
   return (
     <div className={styles.page}>
+
+      <HeroSection />
+
       <main className={styles.main}>
         <Image
           className={styles.logo}
@@ -46,7 +49,6 @@ export default function Home() {
           </a>
         </div> */}
 
-        <HeroSection />
 
         <Button appName="web" className={styles.secondary}>
           Open alert
