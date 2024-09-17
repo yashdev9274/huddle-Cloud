@@ -1574,6 +1574,11 @@
   resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.45.2.tgz#15f9ba81303bf3417083fc6bb742e4e86b49da90"
   integrity sha512-ykALM5kYWTLn1zYuUOZ2cPWlVfrXhc18HzBDyRhoPYN0jey4iQHEFSEowfnhg1RvYnrAVjNBgHNeSAXjrDbGwg==
 
+"@trpc/client@^11.0.0-rc.502":
+  version "11.0.0-rc.502"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-rc.502.tgz#12846fdc2421950cc03f68a3214ebc3c6cbda5d5"
+  integrity sha512-ysFQ3wHnjzLcAqeuwx9/B/YV+2XN/kmfAdTUG+O/SUAdP2wAwo6XbhOxlHw0HWS5pDCsTfJkxDr1nMVkuFM07Q==
+
 "@trpc/react-query@^10.45.2":
   version "10.45.2"
   resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.45.2.tgz#22564b370a1fb8920ba3a1554f4149a151039198"
@@ -1583,6 +1588,11 @@
   version "10.45.2"
   resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.45.2.tgz#5f2778c4810f93b5dc407146334f8da70a0b51fb"
   integrity sha512-wOrSThNNE4HUnuhJG6PfDRp4L2009KDVxsd+2VYH8ro6o/7/jwYZ8Uu5j+VaW+mOmc8EHerHzGcdbGNQSAUPgg==
+
+"@trpc/server@^11.0.0-rc.502":
+  version "11.0.0-rc.502"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-rc.502.tgz#f094f14be207cf9e46ecfab3568c08f1ee75bc6c"
+  integrity sha512-n6B8Q/UqF+hFXyCTXq9AWSn6EkXBbVo/Bs7/QzZxe5KD5CdnBomC7A1y6Qr+i0eiOWwTHJZQ0az+gJetb2fdxw==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.11"
