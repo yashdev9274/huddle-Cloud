@@ -8,6 +8,11 @@ export const trpcClient = trpc.createClient({
     links: [
         httpBatchLink({
             url: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/trpc`,
+            transformer: { // Add this line
+                // Specify your transformer options here, e.g., for JSON
+                serialize: (data) => JSON.stringify(data),
+                deserialize: (data) => JSON.parse(data),
+            },
         }),
     ],
 });

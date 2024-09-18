@@ -1579,11 +1579,6 @@
   resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.0.0-rc.502.tgz#a74f183e33a0cf1f38ff212c082bb2576da07c86"
   integrity sha512-Hs4/URqJ0noQTh2dNpJwPRAGIQN2N9SaHGHAuIBHawrWPWshoi2vwu7tDspmDH96cUAxyqvzSQ8HDIzFgq11Pw==
 
-"@trpc/react-query@^10.45.2":
-  version "10.45.2"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.45.2.tgz#22564b370a1fb8920ba3a1554f4149a151039198"
-  integrity sha512-BAqb9bGZIscroradlNx+Cc9522R+idY3BOSf5z0jHUtkxdMbjeGKxSSMxxu7JzoLqSIEC+LVzL3VvF8sdDWaZQ==
-
 "@trpc/react-query@^11.0.0-rc.502":
   version "11.0.0-rc.502"
   resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.0.0-rc.502.tgz#1ddb04e2edfc557d70a0fe4b67092308dfba79ae"

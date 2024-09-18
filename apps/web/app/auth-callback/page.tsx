@@ -12,22 +12,21 @@ const Page = () => {
     // const apiResponse = await fetch('/api/whatever')
     // const data = await apiResponse.json()
 
-    trpc.autCallback.useQuery(undefined, {
-        onSuccess: (response: { success: boolean }) => {
-            const { success } = response;
-            if (success) {
-                router.push(origin ? `/${origin}` : '/dashboard')
-            }
-        },
-
-        onError: (err: any) => {
-            if (err.data?.code === "UNAUTHORIZED") {
-                router.push("/sign-in")
-            }
-        },
+    const { data, error } = trpc.authCallback.useQuery(undefined, {
         retry: true,
         retryDelay: 500,
-    })
+    });
+
+    if (error) {
+        if (error.data?.code === 'UNAUTHORIZED') {
+            router.push('/sign-in');
+        }
+    }
+
+    if (data?.success) {
+        // user is synced to db
+        router.push(origin ? `/${origin}` : '/dashboard');
+    }
 
 
     return (
