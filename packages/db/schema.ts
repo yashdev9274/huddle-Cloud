@@ -1,14 +1,14 @@
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
-export const users = pgTable('users', {
+export const User = pgTable('user', {
     id: serial('id').primaryKey(),
     email: text('email').notNull().unique(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
-export const files = pgTable('files', {
+export const File = pgTable('file', {
     id: serial('id').primaryKey(),
-    userId: serial('user_id').references(() => users.id),
+    UserId: serial('User_id').references(() => User.id),
     filename: text('filename').notNull(),
     fileSize: text('file_size').notNull(),
     uploadDate: timestamp('upload_date').defaultNow().notNull(),
@@ -16,9 +16,9 @@ export const files = pgTable('files', {
     url: text('url').notNull()
 });
 
-export const notes = pgTable('notes', {
+export const Note = pgTable('note', {
     id: serial('id').primaryKey(),
-    userId: serial('user_id').references(() => users.id),
+    UserId: serial('User_id').references(() => User.id),
     title: text('title').notNull(),
     content: text('content').notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
