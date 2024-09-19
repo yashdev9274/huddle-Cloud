@@ -1,81 +1,119 @@
-# Turborepo starter
+# Personal Cloud Storage Application
 
-This is an official starter Turborepo.
+This project is a personal cloud storage application inspired by iCloud. Built using the **t3 stack** (Next.js, TypeScript, TailwindCSS, tRPC), it features passwordless authentication, file uploads, and a note-taking system. It leverages **Supabase** for the database, **KindeAuth** for authentication, and **Uploadthing** for file storage.
 
-## Using this example
+![Project Preview]()
 
-Run the following command:
+## Objective
 
-```sh
-npx create-turbo@latest
+The goal of this application is to provide a personal cloud storage system where users can manage their files, documents, and notes with passwordless authentication.
+
+## Tech Stack
+
+- **TurboRepo** (Monorepo)
+- **Next.js** (TypeScript)
+- **TailwindCSS** for responsive UI
+- **tRPC** for typesafety API routes
+- **Supabase** for the database
+- **KindeAuth** for passwordless authentication using passkeys
+- **Uploadthing** for file uploads
+- **Drizzle ORM** for schema and database management
+
+## Features
+
+### Authentication
+
+- Passwordless sign-in using [KindeAuth](https://authjs.dev/getting-started/providers/passkey) with **passkeys**.
+- User information is stored securely in the database using **Supabase**.
+
+### Dashboard
+
+The application features a responsive dashboard, with sections for:
+1. **User Profile**: Displays user details.
+2. **Photos**: An image gallery with file upload functionality.
+3. **Drive**: Document storage with upload and management capabilities.
+4. **Notes**: A note-taking system where users can create, edit, and view notes.
+
+### Backend (Next.js, TypeScript, tRPC, Drizzle ORM)
+
+- **tRPC** is used for API routes.
+- API endpoints include `/api/users` for fetching user information.
+- Drizzle ORM is used for schema design and interacting with the database.
+
+### Frontend (React, Next.js, TailwindCSS)
+
+- Responsive UI using **TailwindCSS**.
+- Used ShadcnUI for components.
+- Components include:
+  - User profile display
+  - Image gallery for file uploads
+  - Document list with upload functionality
+  - Notes interface for creating, editing, and viewing notes
+
+### File Storage
+
+- File uploads are handled by **Uploadthing**.
+- Metadata such as file name, size, and upload date is stored in **Supabase**.
+
+### Notes System
+
+- Users can create, edit, and view notes.
+- Notes are stored in **Supabase**, associated with the user.
+- Notes are displayed with titles and timestamps.
+
+## Project Structure
+
+```bash
+my-turborepo/
+├── apps/
+│   ├── docs/                  # this workspace has not been used
+│   └── web/                   # Next.js web app
+├── packages/
+│   ├── ui/                    # Shared UI components
+│   ├── eslint-config/         # ESLint configurations
+│   └── typescript-config/     # TypeScript configurations
+├── .gitignore                 # Git ignore file
+├── package.json               # Root dependencies and scripts
+├── pnpm-workspace.yaml        # PNPM workspace configuration
+└── README.md                  # Project documentation
 ```
 
-## What's inside?
+## Database Schema
 
-This Turborepo includes the following packages/apps:
+- **Users**: Stores user information such as email, name, and passkey details.
+- **Files**: Stores file metadata (name, size, upload date) associated with the user.
+- **Notes**: Stores user-created notes with titles, content, and timestamps.
 
-### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Setup Instructions
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+1. Clone the repository:
 
-### Utilities
+   ```bash
+   git clone https://github.com/yourusername/personal-cloud-storage.git
+   ```
 
-This Turborepo has some additional tools already setup for you:
+2. Install dependencies using yarn:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+   ```bash
+   yarn 
+   ```
 
-### Build
+3. Set up environment variables:
+   - SUPABASE_URL
+   - SUPABASE_ANON_KEY
+   - KINDE_AUTH_KEY
+   - UPLOADTHING_API_KEY
 
-To build all apps and packages, run the following command:
+4. Run the development server:
 
-```
-cd my-turborepo
-pnpm build
-```
+   ```bash
+   yarn run dev 
+   ```
 
-### Develop
+5. Visit the live application at `http://localhost:3000`.
 
-To develop all apps and packages, run the following command:
+### Deployment
 
-```
-cd my-turborepo
-pnpm dev
-```
+Deploy the application to [Vercel](https://huddle-cloud.vercel.app).
 
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
