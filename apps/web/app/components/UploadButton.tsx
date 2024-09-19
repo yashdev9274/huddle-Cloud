@@ -1,9 +1,9 @@
 'use client'
 
-import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+import { Button } from '../../src/components/ui/button'
+import { Dialog, DialogContent, DialogTrigger } from '../../../web/src/components/ui/dialog'
 // import { Button } from '@/components/ui/button'
 import React, { useState } from 'react'
-import { Button } from '../../../web/src/components/ui/button'
 
 function UploadButton() {
 
@@ -17,10 +17,16 @@ function UploadButton() {
                 }
             }}
         >
-            <DialogTrigger asChild>
+            <DialogTrigger
+                onClick={() => setIsOpen(true)}
+                asChild
+            >
                 <Button className='bg-black'> Upload File</Button>
 
             </DialogTrigger>
+            <DialogContent>
+                example content
+            </DialogContent>
         </Dialog>
     )
 }
