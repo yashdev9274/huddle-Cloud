@@ -1,27 +1,55 @@
-import { initTRPC } from '@trpc/server';
+import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 import { db } from '../../../packages/db/index';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
-export const createContext = async () => {
-    return {
-        db,
-    };
-};
+const t = initTRPC.create()
+const middleware = t.middleware
 
-const t = initTRPC.context<typeof createContext>().create({
-    transformer: superjson,
-    errorFormatter({ shape, error }) {
-        return {
-            ...shape,
-            data: {
-                ...shape.data,
-                zodError:
-                    error.cause instanceof ZodError ? error.cause.flatten() : null,
-            },
-        };
-    },
-});
+const isAuth = middleware(async (opts) => {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser()
 
-export const router = t.router;
-export const publicProcedure = t.procedure;
+    if (!user || !user.id) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
+
+    return opts.next({
+        ctx: {
+            userId: user.id,
+            user,
+        },
+    })
+})
+
+export const router = t.router
+export const publicProcedure = t.procedure
+export const privateProcedure = t.procedure.use(isAuth)
+
+// ----
+
+// const t = initTRPC.create()
+// const middleware = t.middleware
+
+// const isAuth = middleware(async (opts) => {
+//   const { getUser } = getKindeServerSession()
+//   const user = getUser()
+
+//   if (!user || !user.id) {
+//     throw new TRPCError({ code: 'UNAUTHORIZED' })
+//   }
+
+//   return opts.next({
+//     ctx: {
+//       userId: user.id,
+//       user,
+//     },
+//   })
+// })
+
+// export const router = t.router
+// export const publicProcedure = t.procedure
+// export const privateProcedure = t.procedure.use(isAuth)
+
+// ----
