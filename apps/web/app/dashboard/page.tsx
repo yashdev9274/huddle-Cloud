@@ -2,6 +2,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { redirect } from 'next/navigation';
 import React from 'react'
 import { db, User } from '../../../../packages/db';
+import Dashboard from 'app/components/Dashboard';
 
 const DashboardPage = async () => {
 
@@ -22,6 +23,8 @@ const DashboardPage = async () => {
             <div>
                 {user.email}
             </div>
+
+            <Dashboard />
         </div>
 
     )
