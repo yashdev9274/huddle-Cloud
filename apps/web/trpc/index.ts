@@ -1,9 +1,9 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { privateProcedure, publicProcedure, router } from './trpc'
 import { TRPCError } from '@trpc/server';
-import { db, User } from '../../../packages/db/index'
+import { db } from '../../../packages/db/index'
 // import { drizzle } from 'drizzle-orm/node-postgres';
-// import * as schema from '../../../packages/db/schema'
+import * as schema from '../../../packages/db/schema'
 // import { client } from '../../web/app/_trpc/client'
 
 export const appRouter = router({
@@ -16,36 +16,53 @@ export const appRouter = router({
         if (!user || !user.id || !user.email)
             throw new TRPCError({ code: 'UNAUTHORIZED' })
 
-        console.log('User: ', User);
-        console.log('DB:', db);
+        // console.log('User: ', User);
+        // console.log('DB:', db);
 
-        const dbUser = await db.query.User.findFirst({
-            with: {
-                id: User.id,
+        try {
+            const dbUser = await db.query.User.findFirst({
+                with: {
+                    id: user.id,
+                }
+            })
+
+            if (!dbUser) {
+                await db.insert(schema.User).values({
+                    id: user.id,
+                    email: user.email,
+                })
             }
-        })
 
-        if (!dbUser) {
-            await db.insert(User).values({
+            return { success: true }
 
-                id: Number(User.id),
-                email: user.email,
 
-            });
+        } catch (error) {
+            console.error('Error in authCallback', error);
+            throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: "An unexpected error occured" })
         }
-
-        return { success: true }
     }),
 
     getUserFiles: privateProcedure.query(async ({ ctx }) => {
 
-        const { userId, user } = ctx
+        const { userId } = ctx;
 
-        return await db.query.File.findMany({
-            with: {
-                userId
-            }
-        })
+        if (!userId) {
+            throw new TRPCError({ code: 'UNAUTHORIZED', message: 'User ID is required' });
+        }
+
+        try {
+
+            return await db.query.File.findMany({
+                with: {
+                    userId
+                }
+            })
+
+        } catch (error) {
+            console.error('Error in getUserFiles:', error);
+            throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'An unexpected error occurred' });
+        }
+
     })
 
 });
