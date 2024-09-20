@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 function Dashboard() {
 
-    const { data: Files, isLoading } = trpc.getUserFiles.useQuery()
+    const { data: File, isLoading } = trpc.getUserFiles.useQuery()
 
 
 
@@ -66,23 +66,23 @@ function Dashboard() {
 
                 {/* display Users Files */}
 
-                {Files && Files?.length !== 0 ? (
+                {File && File?.length !== 0 ? (
                     <ul className='mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3'>
-                        {Files.sort((a, b) => {
+                        {File.sort((a, b) => {
                             return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime()
-                        }).map((Files) => (
+                        }).map((File) => (
                             <li
-                                key={Files.id}
+                                key={File.id}
                                 className='col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow transition hover:shadow-lg'>
                                 <Link
-                                    href={`/dashboard/${Files.id}`}
+                                    href={`/dashboard/${File.id}`}
                                     className='flex flex-col gap-2'>
                                     <div className='pt-6 px-6 flex w-full items-center justify-between space-x-6'>
                                         <div className='h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500' />
                                         <div className='flex-1 truncate'>
                                             <div className='flex items-center space-x-3'>
                                                 <h3 className='truncate text-lg font-medium text-zinc-900'>
-                                                    {Files.filename}
+                                                    {File.filename}
                                                 </h3>
                                             </div>
                                         </div>

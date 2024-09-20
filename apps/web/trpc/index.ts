@@ -3,7 +3,8 @@ import { privateProcedure, publicProcedure, router } from './trpc'
 import { TRPCError } from '@trpc/server';
 import { db } from '../../../packages/db/index'
 // import { drizzle } from 'drizzle-orm/node-postgres';
-import * as schema from '../../../packages/db/schema'
+import { User } from '../../../packages/db/schema'
+import { eq } from 'drizzle-orm';
 // import { client } from '../../web/app/_trpc/client'
 
 export const appRouter = router({
@@ -20,17 +21,14 @@ export const appRouter = router({
         // console.log('DB:', db);
 
         try {
-            const dbUser = await db.query.User.findFirst({
-                with: {
-                    id: user.id,
-                }
-            })
+            const dbUser = await db.select().from(User).where(eq(User.id, user.id));
 
-            if (!dbUser) {
-                await db.insert(schema.User).values({
+            if (dbUser.length === 0) {
+                // If user doesn't exist, create them
+                await db.insert(User).values({
                     id: user.id,
                     email: user.email,
-                })
+                });
             }
 
             return { success: true }
