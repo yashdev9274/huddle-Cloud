@@ -18,14 +18,8 @@ const DashboardPage = async () => {
     // })
 
     return (
-        <div>
-            DashboardPage
-            <div>
-                {user.email}
-            </div>
 
-            <Dashboard />
-        </div>
+        <Dashboard />
 
     )
 }
